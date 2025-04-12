@@ -1,5 +1,4 @@
 <script setup name="AuthButton">
-import { defineProps } from 'vue'
 
 defineProps({
   buttonProps: String,
