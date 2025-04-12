@@ -22,7 +22,7 @@ const router = createRouter({
       name: 'login',
       component: LoginView,
     },
-    /*{
+    {
       path: '/shop',
       name: 'shop',
       // route level code-splitting
@@ -30,7 +30,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/ShopView.vue'),
     },
-    {
+    /*{
       path: '/cart',
       name: 'cart',
       component: CartView,
