@@ -1,5 +1,10 @@
 <script setup>
+import { useCartStore } from '@/stores/cartStore'
+import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+const cartStore = useCartStore()
+
+const totalCartItems = computed(() => cartStore.totalItems())
 </script>
 <template>
   <nav class="px-4">
@@ -13,12 +18,6 @@ import { RouterLink } from 'vue-router'
         >
         <RouterLink to="/shop" class="text-[14px] leading-[24px] font-medium text-[#6C7275]"
           >Shop</RouterLink
-        >
-        <RouterLink to="/shop" class="text-[14px] leading-[24px] font-medium text-[#6C7275]"
-          >Product</RouterLink
-        >
-        <RouterLink to="/" class="text-[14px] leading-[24px] font-medium text-[#6C7275]"
-          >Contact Us</RouterLink
         >
       </div>
       <div class="flex items-center space-x-4">
@@ -81,7 +80,9 @@ import { RouterLink } from 'vue-router'
             />
           </svg>
           <div class="rounded-full flex items-center justify-center w-[20px] h-[20px] bg-[#141718]">
-            <span class="text-white text-[12px] font-bold leading-[10px]">2</span>
+            <span class="text-white text-[12px] font-bold leading-[10px]">{{
+              totalCartItems
+            }}</span>
           </div>
         </RouterLink>
       </div>

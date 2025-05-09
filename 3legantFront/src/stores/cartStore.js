@@ -21,10 +21,10 @@ export const useCartStore = defineStore('cart', {
       } else {
         this.items.push({
           id: product.id,
-          name: product.name,
-          price: product.price,
-          imagePath: product.imagePath,
-          //color: product.color || 'black',
+          name: product.productName,
+          price: product.productPrice,
+          imagePath: product.productImagePath,
+          color: product.productColor || 'black',
           quantity: quantity,
         })
       }
