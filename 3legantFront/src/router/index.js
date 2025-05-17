@@ -4,7 +4,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import CartView from '@/views/CartView.vue'
 import SingleProductView from '@/views/SingleProductView.vue'
-//import { useAuthAdminStore } from '@/stores/auth'
+import { useAuthAdminStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,17 +43,17 @@ const router = createRouter({
       component: SingleProductView,
       props: true,
     },
-    /*{
+    {
       path: '/admin',
       name: 'admin',
       component: () => import('../views/AdminView.vue'),
-      meta: { requiresAdmin: true },
+      //meta: { requiresAdmin: true },
     },
     {
       path: '/login-admin',
       name: 'login-admin',
       component: () => import('../views/LoginAdmin.vue'),
-    },*/
+    },
   ],
 })
 
