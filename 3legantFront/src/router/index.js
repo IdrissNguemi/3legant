@@ -47,7 +47,7 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: () => import('../views/AdminView.vue'),
-      //meta: { requiresAdmin: true },
+      meta: { requiresAdmin: true },
     },
     {
       path: '/login-admin',
@@ -57,7 +57,7 @@ const router = createRouter({
   ],
 })
 
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   const authAdminStore = useAuthAdminStore()
 
   if (to.path === '/admin' && !authAdminStore.isAuthenticated) {
@@ -65,6 +65,6 @@ const router = createRouter({
   }
 
   next()
-})*/
+})
 
 export default router
