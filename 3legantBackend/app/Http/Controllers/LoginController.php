@@ -26,4 +26,32 @@ class LoginController extends Controller
             'access_token' => $token,
         ]);
     }
+
+public function loginAdmin(Request $request)
+    {
+        // Logique d'authentification pour l'admin
+        $adminCredentials = [
+            'admin' => 'admin',
+            'password' => '3legant#2025'
+        ];
+
+        $adminUserData = $request->validate([
+            'admin' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if ($adminUserData['admin'] === $adminCredentials['admin'] && $adminUserData['password'] === $adminCredentials['password']) {
+            // Génére un token ou une session pour l'admin
+            $token = 'admin-auth-token';
+            return response()->json([
+                'message' => 'Admin authenticated successfully',
+                'access_token' => $token
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Incorrect admin credentials'
+        ],401);
+    }
+
 }
