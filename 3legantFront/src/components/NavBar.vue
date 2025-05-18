@@ -1,11 +1,39 @@
 <script setup>
+import { useAuthStore } from '@/stores/auth'
 import { useCartStore } from '@/stores/cartStore'
-import { computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { computed, ref, onMounted } from 'vue'
+import { RouterLink, useRouter } from 'vue-router'
+
 const cartStore = useCartStore()
+const authStore = useAuthStore()
+const router = useRouter()
+
 
 const totalCartItems = computed(() => cartStore.totalItems())
+const isProfileClicked = ref(false)
+
+const closeDropdown = (event) => {
+  if (isProfileClicked.value && !event.target.closest('.profile-dropdown')) {
+    isProfileClicked.value = false
+  }
+}
+
+onMounted(() => {
+  authStore.checkAuth()
+  document.addEventListener('click', closeDropdown)
+})
+
+const onClickOnProfile = () => {
+  isProfileClicked.value = !isProfileClicked.value
+}
+
+const logout = () => {
+  authStore.logout()
+  isProfileClicked.value = false
+  router.push('/')
+}
 </script>
+
 <template>
   <nav class="px-4">
     <div class="max-w-[1120px] w-full mx-auto flex items-center justify-between py-[18px]">
@@ -21,25 +49,7 @@ const totalCartItems = computed(() => cartStore.totalItems())
         >
       </div>
       <div class="flex items-center space-x-4">
-        <div class="flex items-center justify-center">
-          <svg
-            class="interface-outline-search-02"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M18.5 18.5L22 22M21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21C16.7467 21 21 16.7467 21 11.5Z"
-              stroke="#141718"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div class="flex items-center justify-center">
+        <button class="flex items-center justify-center relative profile-dropdown" @click.stop="onClickOnProfile">
           <svg
             class="interface-outline-user-circle"
             width="24"
@@ -55,7 +65,19 @@ const totalCartItems = computed(() => cartStore.totalItems())
               stroke-linejoin="round"
             />
           </svg>
-        </div>
+          <div
+            class="profile-dropdown"
+            :class="[isProfileClicked === false ? 'hidden' : 'absolute top-[26px] left-[0px] bg-white rounded-[4px] border border-solid border-gray-400 space-y-2 p-2 w-max z-10']"
+          >
+            <template v-if="!authStore.isAuthenticated">
+              <RouterLink to="/register" class="pb-2 border-b border-solid border-gray-300 text-[14px] leading-[24px] font-medium text-[#6C7275] hover:text-[#121212] w-max block pr-6">Register</RouterLink>
+              <RouterLink to="/login" class="text-[14px] leading-[24px] font-medium text-[#6C7275] hover:text-[#121212] w-max block pr-6">Login</RouterLink>
+            </template>
+            <template v-else>
+              <button @click="logout" class="text-[14px] leading-[24px] font-medium text-[#6C7275] hover:text-[#121212] w-max block pr-6">Disconnect</button>
+            </template>
+          </div>
+        </button>
         <RouterLink class="flex items-center space-x-[5px]" to="/cart">
           <svg
             class="outline-shopping-bag"
@@ -80,9 +102,7 @@ const totalCartItems = computed(() => cartStore.totalItems())
             />
           </svg>
           <div class="rounded-full flex items-center justify-center w-[20px] h-[20px] bg-[#141718]">
-            <span class="text-white text-[12px] font-bold leading-[10px]">{{
-              totalCartItems
-            }}</span>
+            <span class="text-white text-[12px] font-bold leading-[10px]">{{ totalCartItems }}</span>
           </div>
         </RouterLink>
       </div>

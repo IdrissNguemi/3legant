@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import registerImage from '@/assets/registerImage.svg'
 import AuthButton from '@/components/AuthButton.vue'
-import { useAuthAdminStore } from '@/stores/auth'
+import { useAuthAdminStore } from '@/stores/authAdmin'
 
 const admin = ref('')
 const password = ref('')

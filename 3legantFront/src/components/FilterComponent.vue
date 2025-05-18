@@ -26,7 +26,7 @@ const filterByColor = (color) => {
       </svg>
       <span class="text-[20px] leading-[32px] font-semibold text-[#121212]">Filter</span>
     </h3>
-    <div class="space-y-4">
+    <div class="space-y-4 pb-[50px]">
       <h4 class="font-semibold text-[#121212]">COLORS</h4>
       <u class="space-y-3 block">
         <li :class="['block text-[14px] font-semiboold leading-[26px] text-[#807E7E]']">
