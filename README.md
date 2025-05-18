@@ -1,6 +1,6 @@
 # projet 3legant
 
-**3legant** est une application web e-commerce moderne dédiée à la vente de produits immobiliers (terrains, maisons, appartements, etc.).  
+**3legant** est une application web e-commerce moderne dédiée à la vente de meubles.  
 Ce projet fullstack combine **Laravel** pour le backend (API sécurisée, authentification, policies, CRUD) et **Vue.js** pour le frontend (Vue Router, Pinia).
 
 ---
