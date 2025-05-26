@@ -108,7 +108,7 @@ console.log(cartItems)
                 <td class="py-4 px-2">
                   <div class="flex items-center">
                     <img
-                      :src="item.imagePath"
+                      :src="`http://localhost:8000/storage/${item.imagePath}`"
                       :alt="item.name"
                       class="w-[80px] h-[96px] object-cover mr-4"
                     />

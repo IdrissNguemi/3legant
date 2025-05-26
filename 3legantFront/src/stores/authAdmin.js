@@ -3,15 +3,15 @@ import { defineStore } from 'pinia'
 
 export const useAuthAdminStore = defineStore('authAdmin', {
   state: () => ({
-    token: localStorage.getItem('admin_token') || null,
+    token: localStorage.getItem('access_token') || null,
   }),
   getters: {
     isAuthenticated: (state) => !!state.token,
   },
   actions: {
-    login(token) {
+    setToken(token) {
       this.token = token
-      localStorage.setItem('admin_token', token)
+      localStorage.setItem('access_token', token)
 
     },
   },
