@@ -1,17 +1,14 @@
-// stores/authAdmin.js
-import { defineStore } from 'pinia'
+import './index.css'
 
-export const useAuthAdminStore = defineStore('authAdmin', {
-  state: () => ({
-    token: localStorage.getItem('admin_token') || null,
-  }),
-  getters: {
-    isAuthenticated: (state) => !!state.token,
-  },
-  actions: {
-    login(token) {
-      this.token = token
-      localStorage.setItem('admin_token', token)
-    },
-  },
-})
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+
+app.mount('#app')
