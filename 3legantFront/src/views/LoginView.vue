@@ -4,7 +4,9 @@ import registerImage from '@/assets/registerImage.svg'
 import { ref } from 'vue'
 import axios from 'axios'
 import AuthButton from '@/components/AuthButton.vue'
+import { useAuthStore } from '@/stores/auth'
 
+const authStore = useAuthStore()
 const email = ref('')
 const password = ref('')
 const error = ref('')
@@ -24,7 +26,9 @@ const login = async () => {
     })
 
     if (response.data.access_token) {
-      localStorage.setItem('token', response.data.access_token)
+      // Utiliser le store d'authentification pour la connexion
+      authStore.login(response.data.access_token)
+      // Configurer les headers Axios
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access_token}`
       router.push('/')
     }

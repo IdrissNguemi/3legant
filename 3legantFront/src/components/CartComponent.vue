@@ -35,6 +35,8 @@ const handleCheckoutCompleted = (value) => {
     isOrderCompleted.value = false
   }
 }
+
+console.log(cartItems)
 </script>
 <template>
   <section class="px-4">
@@ -85,12 +87,9 @@ const handleCheckoutCompleted = (value) => {
         class="w-full py-[80px] flex items-start justify-between"
       >
         <div class="max-w-[643px] w-full">
-          <div v-if="cartItems.length === 0" class="text-center py-8">
+          <div v-if="cartItems.length === 0" class="text-center py-28">
             <p class="text-gray-500 text-lg">Your cart is empty</p>
-            <router-link
-              to="/shop"
-              class="mt-4 inline-block bg-[#141718] text-white px-4 py-2 rounded-md"
-            >
+            <router-link to="/shop" class="mt-4 inline-block underline">
               Continue Shopping
             </router-link>
           </div>
@@ -109,7 +108,7 @@ const handleCheckoutCompleted = (value) => {
                 <td class="py-4 px-2">
                   <div class="flex items-center">
                     <img
-                      :src="`http://localhost:8000/storage/${item.imagePath}`"
+                      :src="item.imagePath"
                       :alt="item.name"
                       class="w-[80px] h-[96px] object-cover mr-4"
                     />
@@ -164,7 +163,11 @@ const handleCheckoutCompleted = (value) => {
           </table>
         </div>
 
-        <OrderSummary :total="cartTotal" @checkoutCompleted="handleCheckoutCompleted" />
+        <OrderSummary
+          :total="cartTotal"
+          :cartItems="cartItems"
+          @checkoutCompleted="handleCheckoutCompleted"
+        />
       </div>
       <div v-else-if="isOrderCompleted === true">
         <OrderCompleted />

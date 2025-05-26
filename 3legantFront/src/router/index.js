@@ -4,7 +4,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import LoginView from '@/views/LoginView.vue'
 import CartView from '@/views/CartView.vue'
 import SingleProductView from '@/views/SingleProductView.vue'
-import { useAuthAdminStore } from '@/stores/auth'
+import { useAuthAdminStore } from '@/stores/authAdmin'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

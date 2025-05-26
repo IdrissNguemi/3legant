@@ -12,6 +12,7 @@ export const useAuthAdminStore = defineStore('authAdmin', {
     login(token) {
       this.token = token
       localStorage.setItem('admin_token', token)
+
     },
   },
 })

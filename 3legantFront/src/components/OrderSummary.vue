@@ -1,16 +1,24 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 const emit = defineEmits(['checkoutCompleted'])
 const isCompleted = ref(false)
+
+const props = defineProps({
+  total: Number,
+  cartItems: {
+    type: Array,
+    default: () => [],
+  },
+})
+
+const isCartEmpty = computed(() => {
+  return props.cartItems.length === 0
+})
 
 const onCheckout = () => {
   isCompleted.value = true
   emit('checkoutCompleted', isCompleted.value)
 }
-
-defineProps({
-  total: Number,
-})
 </script>
 
 <template>
@@ -55,8 +63,14 @@ defineProps({
       </div>
     </div>
     <button
-      class="flex items-center justify-center py-[10px] rounded-[8px] w-full bg-[#141718] text-[18px] text-white leading-[32px] tracking-[-0.4px]"
+      class="flex items-center justify-center py-[10px] rounded-[8px] w-full text-[18px] leading-[32px] tracking-[-0.4px]"
+      :class="[
+        isCartEmpty
+          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          : 'bg-[#141718] text-white hover:bg-gray-800',
+      ]"
       @click="onCheckout()"
+      :disabled="isCartEmpty"
     >
       Checkout
     </button>
